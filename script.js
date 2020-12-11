@@ -7,6 +7,7 @@ const pMessage = getElement('.message');
 const ulWord = getElement('.word');
 const ulQwerty = getElement('.qwerty');
 let score = 0;
+let numberOfGuesses = 10;
 newGame();
 
 function clearMessage() {
@@ -63,11 +64,12 @@ function handleGuess(key) {
             if (word[i] == key) letterbox[i].textContent = key;
         }
         displayMessage('match');
-        score += 100;
+        score += Math.floor(20 * numberOfGuesses * (1 + 1 / word.length));
         displayScore(score);
     } else {
         displayMessage('no-match');
-        score -= word.length * 10;
+        score -= Math.floor(5 * word.length);
+        numberOfGuesses--;
         displayScore(score);
     }
     let guess = '';
