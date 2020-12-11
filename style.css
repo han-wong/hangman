@@ -99,3 +99,9 @@ body {
     cursor    : default;
     padding   : 6px;
 }
+
+@media only screen and (min-width: 400px) {
+    body {
+        font-size: 16px;
+    }
+}
