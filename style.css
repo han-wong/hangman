@@ -1,11 +1,8 @@
-.word {
+.game-area {
     align-items    : center;
     display        : flex;
-    flex-flow      : row nowrap;
+    flex-flow      : column nowrap;
     justify-content: center;
-    list-style     : none;
-    margin         : 0;
-    padding        : 0;
     position       : fixed;
     top            : 0;
     bottom         : 0;
@@ -13,17 +10,104 @@
     right          : 0;
 }
 
+.score {
+    border       : 0px solid dimgray;
+    border-radius: 15px;
+    box-sizing   : border-box;
+    font-family  : Arial, sans-serif;
+    font-size    : 20px;
+    font-weight  : 600;
+    line-height  : 20px;
+    text-align   : center;
+    margin       : 20px;
+    padding      : 5px;
+    height       : 30px;
+    width        : 500px;
+}
+
+
+.word {
+    align-items    : center;
+    display        : flex;
+    flex-flow      : row nowrap;
+    justify-content: center;
+    list-style     : none;
+    margin         : 50px;
+    padding        : 0;
+}
+
 .letterbox {
-    background : linear-gradient(135deg, whitesmoke, pink);
-    border     : 0px solid;
-    box-sizing : border-box;
-    font-family: 'Courier New', Courier, monospace;
-    font-size  : 30px;
-    font-weight: 600;
-    line-height: 27px;
-    text-align : center;
-    margin     : 1px;
-    padding    : 10px;
-    height     : 50px;
-    width      : 50px;
+    background    : linear-gradient(135deg, whitesmoke, pink);
+    border        : 0px solid;
+    box-sizing    : border-box;
+    font-family   : 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size     : 30px;
+    font-weight   : 600;
+    line-height   : 30px;
+    text-align    : center;
+    text-transform: uppercase;
+    margin        : 1px;
+    padding       : 10px;
+    height        : 50px;
+    width         : 50px;
+}
+
+.message {
+    border       : 1px solid dimgray;
+    border-radius: 15px;
+    box-sizing   : border-box;
+    font-family  : Arial, sans-serif;
+    font-size    : 20px;
+    font-weight  : 600;
+    line-height  : 20px;
+    text-align   : center;
+    margin       : 20px;
+    padding      : 5px;
+    height       : 30px;
+    width        : 500px;
+}
+
+.qwerty {
+    align-items    : center;
+    display        : flex;
+    flex-flow      : row wrap;
+    justify-content: center;
+    list-style     : none;
+    margin         : 50px;
+    padding        : 0;
+    width          : 550px;
+}
+
+.letters {
+    background    : linear-gradient(135deg, whitesmoke, pink);
+    border        : 0px solid;
+    box-sizing    : border-box;
+    font-family   : 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size     : 30px;
+    font-weight   : 600;
+    line-height   : 30px;
+    text-align    : center;
+    text-transform: uppercase;
+    margin        : 1px;
+    padding       : 10px;
+    height        : 50px;
+    width         : 50px;
+}
+
+.letters:hover {
+    background: linear-gradient(270deg, whitesmoke, pink);
+    border    : 2px solid darkmagenta;
+    cursor    : pointer;
+    padding   : 8px;
+}
+
+.disabled {
+    opacity: 0.5;
+}
+
+.disabled:hover {
+    background: linear-gradient(135deg, whitesmoke, pink);
+    border    : 0;
+    cursor    : default;
+    padding   : 10px;
 }
