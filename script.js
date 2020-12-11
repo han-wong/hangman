@@ -1,3 +1,4 @@
+const body = getElement('body');
 const words = ['bulbasaur', 'ivysaur', 'venusaur',
     'charmander', 'charmeleon', 'charizard',
     'squirtle', 'wartortle', 'blastoise',
@@ -81,8 +82,8 @@ function handleGuess(key) {
     if (guess == word) {
         displayMessage('win');
         disableKeyboard();
-        window.removeEventListener('keypress', handleKeypress);
-        window.removeEventListener('click', handleClick);
+        body.removeEventListener('keypress', handleKeypress);
+        body.removeEventListener('click', handleClick);
         console.log('win');
     }
 }
@@ -126,8 +127,8 @@ function newGame() {
         const li = create('li', 'letters', qwerty[i], 'letter', `Key${qwerty[i].toUpperCase()}`);
         ulQwerty.append(li);
     }
-    window.addEventListener('keypress', handleKeypress);
-    window.addEventListener('click', handleClick);
+    body.addEventListener('keypress', handleKeypress);
+    body.addEventListener('click', handleClick);
 }
 
 function randomWord() { return words[Math.floor(Math.random() * words.length)]; };
