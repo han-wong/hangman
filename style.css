@@ -1,70 +1,61 @@
+* {
+    box-sizing : border-box;
+    font-family: 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin     : 0;
+    padding    : 0;
+}
+
+body {
+    background-color: teal;
+    font-size       : small;
+}
+
 .game-area {
-    align-items    : center;
-    display        : flex;
-    flex-flow      : column nowrap;
-    justify-content: center;
-    position       : fixed;
-    top            : 0;
-    bottom         : 0;
-    left           : 0;
-    right          : 0;
+    align-items     : center;
+    display         : flex;
+    flex-flow       : column nowrap;
+    justify-content : space-evenly;
+    background-color: whitesmoke;
+    height          : 80%;
+    position        : fixed;
+    top             : 10%;
+    bottom          : 10%;
+    left            : 0;
+    right           : 0;
+    z-index         : -1;
 }
 
 .score {
-    border       : 0px solid dimgray;
-    border-radius: 15px;
-    box-sizing   : border-box;
-    font-family  : Arial, sans-serif;
-    font-size    : 20px;
-    font-weight  : 600;
-    line-height  : 20px;
-    text-align   : center;
-    margin       : 20px;
-    padding      : 5px;
-    height       : 30px;
-    width        : 500px;
+    font-weight: 900;
 }
-
 
 .word {
     align-items    : center;
     display        : flex;
-    flex-flow      : row nowrap;
+    flex-flow      : row wrap;
     justify-content: center;
     list-style     : none;
-    margin         : 50px;
+    margin         : 0;
     padding        : 0;
 }
 
 .letterbox {
-    background    : linear-gradient(135deg, whitesmoke, pink);
+    background    : linear-gradient(135deg, red, tomato);
     border        : 0px solid;
-    box-sizing    : border-box;
-    font-family   : 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size     : 30px;
-    font-weight   : 600;
-    line-height   : 30px;
+    border-radius : 2px;
+    color         : whitesmoke;
+    font-weight   : 900;
+    line-height   : 13px;
     text-align    : center;
     text-transform: uppercase;
-    margin        : 1px;
-    padding       : 10px;
-    height        : 50px;
-    width         : 50px;
+    margin        : 2px;
+    padding       : 6px;
+    height        : 25px;
+    width         : 25px;
 }
 
 .message {
-    border       : 1px solid dimgray;
-    border-radius: 15px;
-    box-sizing   : border-box;
-    font-family  : Arial, sans-serif;
-    font-size    : 20px;
-    font-weight  : 600;
-    line-height  : 20px;
-    text-align   : center;
-    margin       : 20px;
-    padding      : 5px;
-    height       : 30px;
-    width        : 500px;
+    font-weight: 900;
 }
 
 .qwerty {
@@ -73,32 +64,29 @@
     flex-flow      : row wrap;
     justify-content: center;
     list-style     : none;
-    margin         : 50px;
-    padding        : 0;
-    max-width      : 550px;
+    max-width      : 300px;
 }
 
 .letters {
-    background    : linear-gradient(135deg, whitesmoke, pink);
+    background    : linear-gradient(135deg, maroon, tomato);
     border        : 0px solid;
-    box-sizing    : border-box;
-    font-family   : 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size     : 30px;
-    font-weight   : 600;
-    line-height   : 30px;
+    border-radius : 2px;
+    color         : whitesmoke;
+    font-weight   : 900;
+    line-height   : 13px;
     text-align    : center;
     text-transform: uppercase;
-    margin        : 1px;
-    padding       : 10px;
-    height        : 50px;
-    width         : 50px;
+    margin        : 2px;
+    padding       : 6px;
+    height        : 25px;
+    width         : 25px;
 }
 
 .letters:hover {
-    background: linear-gradient(270deg, whitesmoke, pink);
-    border    : 2px solid darkmagenta;
+    background: linear-gradient(270deg, maroon, tomato);
+    border    : 2px solid black;
     cursor    : pointer;
-    padding   : 8px;
+    padding   : 5px;
 }
 
 .disabled {
@@ -106,8 +94,14 @@
 }
 
 .disabled:hover {
-    background: linear-gradient(135deg, whitesmoke, pink);
+    background: linear-gradient(135deg, maroon, tomato);
     border    : 0;
     cursor    : default;
-    padding   : 10px;
+    padding   : 6px;
+}
+
+@media only screen and (orientation: landscape) {
+    .game-area {
+        background-color: lightblue;
+    }
 }
