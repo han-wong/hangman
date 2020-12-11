@@ -10,6 +10,37 @@ body {
     font-size       : small;
 }
 
+header,
+footer {
+    align-items    : center;
+    display        : flex;
+    flex-flow      : column nowrap;
+    justify-content: center;
+    text-align     : center;
+    height         : 10%;
+    position       : fixed;
+    left           : 0;
+    right          : 0;
+}
+
+header {
+    color: whitesmoke;
+    top  : 0;
+}
+
+footer {
+    bottom: 0;
+}
+
+footer a {
+    color     : white;
+    margin-top: 5px;
+}
+
+footer audio {
+    height: 30px;
+}
+
 .game-area {
     align-items     : center;
     display         : flex;
