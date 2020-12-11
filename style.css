@@ -99,9 +99,3 @@ body {
     cursor    : default;
     padding   : 6px;
 }
-
-@media only screen and (orientation: landscape) {
-    .game-area {
-        background-color: lightblue;
-    }
-}
