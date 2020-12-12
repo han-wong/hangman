@@ -1,35 +1,21 @@
 const body = getElement('body');
-let words = null;
 const qwerty = 'qwertyuiopasdfghjklzxcvbnm';
 const special = ':.- ’♀♂';
 const hidden = '';
 const main = getElement('main');
-let word;
-const pMessage = getElement('.message');
 const ulWord = getElement('.word');
 const ulQwerty = getElement('.qwerty');
-const ulScore = getElements('.score>li');
 const url = './pokemons.json';
+let p;
 let key;
-let pokemon;
 let score = 0;
 let numberOfGuesses = 10;
 
 document.onload = init(url);
 
 function export2txt() {
-    // let pokemons = [];
-    // for (let i = 0; i < words.length; i++) {
-    //     const element = words[i];
-    //     let pokemon = {};
-    //     pokemon['pokedex'] = '#' + (i + 1);
-    //     pokemon['name'] = element;
-    //     pokemons.push(pokemon);
-
-    // }
-    // console.log(pokemons);
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(new Blob([JSON.stringify(pokemons2, null, 2)], {
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(arrayarray, null, 2)], {
         type: "text/plain"
     }));
     a.setAttribute("download", "data.txt");
@@ -48,6 +34,15 @@ function create(type, cls, text, key, value) {
     key ? element.dataset[key] = value : '';
     return element;
 }
+function decrypt(char) {
+    let i = 0;
+    for (i; i < qwerty.length; i++) {
+        if (qwerty[i] == char)
+            break;
+    }
+    return ((key + i) % qwerty.length).toString();
+}
+
 function disableKeyboard() {
     let keyboard = getElements('.letters');
     for (const key of keyboard) {
@@ -56,25 +51,39 @@ function disableKeyboard() {
 }
 
 function displayMessage(message, key) {
-    if (message == 'same-key-pressed') {
-        pMessage.textContent = 'This letter already been guessed';
-    }
-    if (message == 'you-guessed') {
-        pMessage.textContent = `You guessed the letter ${key}`;
-    }
-    if (message == 'no-match') {
-        pMessage.textContent = `Guess again!`;
-    }
-    if (message == 'match') {
-        pMessage.textContent = `You got one right!`;
-    }
-    if (message == 'win') {
-        pMessage.textContent = `You won! Game Over!`;
+    const msg = getElement('.message');
+    switch (message) {
+        case 'same-key-pressed': msg.textContent = 'This letter already been guessed';
+            break;
+        case 'you-guessed': msg.textContent = `You guessed the letter ${key}`;
+            break;
+        case 'no-match': msg.textContent = `Guess again!`;
+            break;
+        case 'match': msg.textContent = `You got one right!`;
+            break;
+        case 'win': msg.textContent = `You won! Game Over!`;
+            break;
+        case 'lose': msg.textContent = `You lost! Game Over!`;
+            break;
     }
 }
 function displayScore(score) {
-    ulScore[0].textContent = `Score: ${score}`;
-    ulScore[1].textContent = `Guesses left: ${numberOfGuesses}`;
+    const liScore = getElement('.score');
+    const liLife = getElement('.life');
+    liScore.textContent = `Score: ${score}`;
+    liLife.innerHTML = ``;
+    for (let i = 0; i < numberOfGuesses; i++) {
+        liLife.innerHTML += `${'&hearts;'}`;
+    }
+}
+
+function displayLives() {
+    const lives = getElement('.life');
+    lives.innerHTML = ``;
+    for (let i = 0; i < numberOfGuesses; i++) {
+        lives.innerHTML += `${'&hearts;'}`;
+    }
+
 }
 function encrypt(char) {
     let i = 0;
@@ -92,8 +101,16 @@ function getElement(selector) {
 function getElements(selector) {
     return document.querySelectorAll(selector);
 }
+function handleGameOver() {
+    displayMessage('lose');
+    disableKeyboard();
+    body.removeEventListener('keypress', handleKeypress);
+    body.removeEventListener('click', handleClick);
+    getElement('.pokemon').classList.add('show');
+}
 
 function handleGuess(key) {
+    let countEmptyLetters = 0;
     let letterboxes = getElements('.letterbox');
     let encryptedLetters = [];
     for (const letterbox of letterboxes) {
@@ -108,20 +125,22 @@ function handleGuess(key) {
         displayScore(score);
     } else {
         displayMessage('no-match');
-        score -= Math.floor(5 * word.length);
+        score -= Math.floor(5 * 5);
         numberOfGuesses--;
         displayScore(score);
     }
-    let guess = '';
-    for (const letter of letterboxes) {
-        guess += letter.textContent;
+    for (let i = 0; i < letterboxes.length; i++) {
+        if (letterboxes[i].textContent == '') {
+            countEmptyLetters++;
+        }
     }
-
-    if (guess == word) {
+    if (numberOfGuesses == 0) handleGameOver();
+    if (countEmptyLetters == 0) {
         displayMessage('win');
         disableKeyboard();
         body.removeEventListener('keypress', handleKeypress);
         body.removeEventListener('click', handleClick);
+        getElement('.pokemon').classList.add('show');
         console.log('win');
     }
 }
@@ -162,9 +181,10 @@ function init(url) {
         .catch(err => console.log(err));
 }
 function newGame(pokemons) {
+    p = pokemons;
     let pokemon = randomPokemon(pokemons);
     console.log(pokemon);
-    getElement('.pokemon').src = pokemon.src;
+    getElement('.pokemon').style.backgroundImage = `url(${pokemon.src}), url(${pokemon.src})`;
     let name = pokemon.name.toLowerCase();
     for (let i = 0; i < name.length; i++) {
         if (qwerty.includes(name[i])) {
