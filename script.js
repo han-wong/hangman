@@ -72,11 +72,11 @@ function displayScore(lives) {
     const keyboard = getElements('.letters');
     let score = 0;
     for (const key of keyboard) {
-        if (key.className == 'letters'){
+        if (key.className == 'letters') {
             score++;
         }
     }
-    liScore.textContent = `Score: ${score*lives}`;
+    liScore.textContent = `Score: ${score * lives}`;
 }
 
 
@@ -125,9 +125,10 @@ function handleGuess(key) {
         }
         displayMessage('match');
     } else {
-        displayMessage('no-match');
-        displayLives()
         numberOfGuesses--;
+        displayMessage('no-match');
+        displayLives();
+
     }
     for (let i = 0; i < letterboxes.length; i++) {
         if (letterboxes[i].textContent == '') {
