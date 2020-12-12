@@ -10,24 +10,25 @@
 </head>
 
 <body>
-    <header>
+    <header class="flex-col">
         <h1>Pokemon Hangman</h1>
     </header>
     <main>
-        <section class="game-area">
+        <section class="game-area flex-col">
             <h1>Guess the name of a Pokemon!</h1>
+            <img class="pokemon" src="" alt="picture of a Pokémon">
             <ul class="score">
                 <li>Score: 0</li>
                 <li>Guesses left: 11</li>
             </ul>
             <p class="message">Pick a letter!</p>
-            <ul class="word"></ul>
-            <ul class="qwerty"></ul>
+            <ul class="word flex-row"></ul>
+            <ul class="qwerty flex-row"></ul>
             <a href="https://www.bensound.com">Royalty Free Music from Bensound</a>
         </section>
     </main>
-    <footer>
-        <audio src="https://www.bensound.com/bensound-music/bensound-smile.mp3" type="audio/mpeg" autoplay controls
+    <footer class="flex-col">
+        <audio src="https://www.bensound.com/bensound-music/bensound-smile.mp3" type="audio/mpeg" controls
             loop>www.bensound.com</audio>
     </footer>
 </body>
