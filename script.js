@@ -6,6 +6,7 @@ let word;
 const pMessage = getElement('.message');
 const ulWord = getElement('.word');
 const ulQwerty = getElement('.qwerty');
+const ulScore = getElements('.score>li');
 let score = 0;
 let numberOfGuesses = 10;
 newGame();
@@ -45,8 +46,8 @@ function displayMessage(message, key) {
     }
 }
 function displayScore(score) {
-    let pScore = getElement('.score');
-    pScore.textContent = `Score: ${score}`;
+    ulScore[0].textContent = `Score: ${score}`;
+    ulScore[1].textContent = `Guesses left: ${numberOfGuesses}`;
 }
 
 function getElement(selector) {
