@@ -62,8 +62,22 @@ footer audio {
     z-index         : -1;
 }
 
-.score {
+.scorebar {
+    list-style : none;
     font-weight: 900;
+    text-align : center;
+    max-width  : 500px;
+    width      : 100%;
+}
+
+.score {
+
+    width: 50%;
+}
+
+.life {
+    color: tomato;
+    width: 50%;
 }
 
 .word {
@@ -145,6 +159,24 @@ footer audio {
 
 .invisible {
     visibility: hidden;
+}
+
+.pokemon {
+    background-color        : whitesmoke;
+    background-blend-mode   : color-dodge;
+    background-repeat       : no-repeat, no-repeat;
+    background-position     : center center;
+    background-size         : contain;
+    /* background-size      : 100%; */
+    border                  : 3px solid darkgray;
+    border-radius           : 25%;
+    opacity                 : 0.9;
+    height                  : 100px;
+    width                   : 100px;
+}
+
+.show {
+    background-blend-mode: normal;
 }
 
 @media only screen and (min-width: 400px) {
