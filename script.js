@@ -9,7 +9,7 @@ const url = './pokemons.json';
 let p;
 let key;
 let score = 0;
-let numberOfGuesses = 10;
+let numberOfGuesses = 7;
 
 document.onload = init(url);
 
@@ -67,15 +67,18 @@ function displayMessage(message, key) {
             break;
     }
 }
-function displayScore(score) {
+function displayScore(lives) {
     const liScore = getElement('.score');
-    const liLife = getElement('.life');
-    liScore.textContent = `Score: ${score}`;
-    liLife.innerHTML = ``;
-    for (let i = 0; i < numberOfGuesses; i++) {
-        liLife.innerHTML += `${'&hearts;'}`;
+    const keyboard = getElements('.letters');
+    let score = 0;
+    for (const key of keyboard) {
+        if (key.className == 'letters'){
+            score++;
+        }
     }
+    liScore.textContent = `Score: ${score*lives}`;
 }
+
 
 function displayLives() {
     const lives = getElement('.life');
@@ -121,13 +124,10 @@ function handleGuess(key) {
             if (encryptedLetters[i] == encrypt(key)) letterboxes[i].textContent = key;
         }
         displayMessage('match');
-        score += 10;
-        displayScore(score);
     } else {
         displayMessage('no-match');
-        score -= Math.floor(5 * 5);
+        displayLives()
         numberOfGuesses--;
-        displayScore(score);
     }
     for (let i = 0; i < letterboxes.length; i++) {
         if (letterboxes[i].textContent == '') {
@@ -136,6 +136,7 @@ function handleGuess(key) {
     }
     if (numberOfGuesses == 0) handleGameOver();
     if (countEmptyLetters == 0) {
+        displayScore(numberOfGuesses);
         displayMessage('win');
         disableKeyboard();
         body.removeEventListener('keypress', handleKeypress);
