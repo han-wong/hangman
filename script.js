@@ -1,12 +1,8 @@
 const body = getElement('body');
-const qwerty = 'qwertyuiopasdfghjklzxcvbnm';
-const special = ':.- ’♀♂';
-const hidden = '';
 const main = getElement('main');
 const ulWord = getElement('.word');
 const ulQwerty = getElement('.qwerty');
 const url = './pokemons.json';
-let p;
 let key;
 let score = 0;
 let numberOfGuesses = 7;
@@ -80,21 +76,21 @@ function displayScore(lives) {
 }
 
 
-function displayLives() {
-    const lives = getElement('.life');
-    lives.innerHTML = ``;
-    for (let i = 0; i < numberOfGuesses; i++) {
-        lives.innerHTML += `${'&hearts;'}`;
+function displayLife() {
+    const life = getElement('.life');
+    life.innerHTML = `LIFE<br>&nbsp;`;
+    for (let i = 0; i < sessionStorage.life; i++) {
+        life.innerHTML += `${'&hearts;'}`;
     }
 
 }
 function encrypt(char) {
     let i = 0;
-    for (i; i < qwerty.length; i++) {
-        if (qwerty[i] == char)
+    for (i; i < sessionStorage.qwerty.length; i++) {
+        if (sessionStorage.qwerty[i] == char)
             break;
     }
-    return ((key + i) % qwerty.length).toString();
+    return ((key + i) % sessionStorage.qwerty.length).toString();
 }
 
 function getElement(selector) {
@@ -125,9 +121,9 @@ function handleGuess(key) {
         }
         displayMessage('match');
     } else {
-        numberOfGuesses--;
+        sessionStorage.life--;
         displayMessage('no-match');
-        displayLives();
+        displayLife();
 
     }
     for (let i = 0; i < letterboxes.length; i++) {
@@ -135,7 +131,7 @@ function handleGuess(key) {
             countEmptyLetters++;
         }
     }
-    if (numberOfGuesses == 0) handleGameOver();
+    if (sessionStorage.life == 0) handleGameOver();
     if (countEmptyLetters == 0) {
         displayScore(numberOfGuesses);
         displayMessage('win');
@@ -183,34 +179,37 @@ function init(url) {
         .catch(err => console.log(err));
 }
 function newGame(pokemons) {
-    p = pokemons;
-    let pokemon = randomPokemon(pokemons);
-    console.log(pokemon);
+    const pokemon = randomWord(pokemons);
+    sessionStorage.qwerty = 'qwertyuiopasdfghjklzxcvbnm';
+    sessionStorage.special = ':.- ’♀♂';
+
+    sessionStorage.life = 7;
+    sessionStorage.pokemon = pokemon.name.toLowerCase();
     getElement('.pokemon').style.backgroundImage = `url(${pokemon.src}), url(${pokemon.src})`;
-    let name = pokemon.name.toLowerCase();
-    for (let i = 0; i < name.length; i++) {
-        if (qwerty.includes(name[i])) {
-            const li = create('li', 'letterbox', null, 'letter', encrypt(name[i]));
+    for (let i = 0; i < sessionStorage.pokemon.length; i++) {
+        const letter = sessionStorage.pokemon[i];
+        if (sessionStorage.qwerty.includes(letter)) {
+            const li = create('li', 'letterbox', null, 'letter', encrypt(letter));
             ulWord.append(li);
-        } else if (special.includes(name[i])) {
-            const li = create('li', 'letterbox', encrypt(name[i]));
+        } else if (sessionStorage.special.includes(pokemon[i])) {
+            const li = create('li', 'letterbox', encrypt(letter));
             li.classList.add('special');
             ulWord.append(li);
         } else {
-            const li = create('li', 'letterbox', encrypt(name[i]));
+            const li = create('li', 'letterbox', encrypt(letter));
             li.classList.add('hidden');
             ulWord.append(li);
         }
     }
-    for (let i = 0; i < qwerty.length; i++) {
-        const li = create('li', 'letters', qwerty[i], 'letter', `Key${qwerty[i].toUpperCase()}`);
+    for (let i = 0; i < sessionStorage.qwerty.length; i++) {
+        const li = create('li', 'letters', sessionStorage.qwerty[i], 'letter', `Key${sessionStorage.qwerty[i].toUpperCase()}`);
         ulQwerty.append(li);
     }
     body.addEventListener('keypress', handleKeypress);
     body.addEventListener('click', handleClick);
 }
 
-function randomPokemon(words) {
+function randomWord(words) {
     key = Math.floor(Math.random() * words.length);
     return words[key];
 };
