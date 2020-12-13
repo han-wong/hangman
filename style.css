@@ -7,25 +7,38 @@
 
 body {
     background-color: teal;
-    font-size       : small;
+    font-size       : smaller;
 }
 
-header,
-footer {
+header {
+    color     : whitesmoke;
     text-align: center;
-    height    : 10%;
+    height    : 50px;
     position  : fixed;
+    top       : 0;
     left      : 0;
     right     : 0;
 }
 
-header {
-    color: whitesmoke;
-    top  : 0;
+main {
+    align-items    : center;
+    display        : flex;
+    flex-flow      : column nowrap;
+    justify-content: space-evenly;
+    overflow       : hidden;
+    position       : fixed;
+    top            : 50px;
+    bottom         : 50px;
+    left           : 0;
+    right          : 0;
 }
 
 footer {
-    bottom: 0;
+    height  : 50px;
+    position: fixed;
+    left    : 0;
+    right   : 0;
+    bottom  : 0;
 }
 
 footer a {
@@ -35,6 +48,7 @@ footer a {
 
 footer audio {
     height: 30px;
+    width : 80%
 }
 
 .flex-col {
@@ -53,31 +67,30 @@ footer audio {
 
 .game-area {
     background-color: whitesmoke;
-    height          : 80%;
-    position        : fixed;
-    top             : 10%;
-    bottom          : 10%;
-    left            : 0;
-    right           : 0;
-    z-index         : -1;
+    text-align      : center;
+    height          : 100%;
+    width           : 100%;
 }
 
 .scorebar {
-    list-style : none;
-    font-weight: 900;
-    text-align : center;
-    max-width  : 500px;
-    width      : 100%;
+    align-items    : center;
+    display        : flex;
+    flex-flow      : row nowrap;
+    justify-content: space-evenly;
+    list-style     : none;
+    font-weight    : 900;
+    text-align     : center;
+    max-width      : 500px;
+    width          : 100%;
 }
 
 .score {
-
-    width: 50%;
+    min-width: 54px;
 }
 
 .life {
-    color: tomato;
-    width: 50%;
+    color    : tomato;
+    min-width: 54px;
 }
 
 .word {
@@ -179,8 +192,48 @@ footer audio {
     background-blend-mode: normal;
 }
 
+.title {
+    text-align: center;
+}
+
 @media only screen and (min-width: 400px) {
     body {
         font-size: 16px;
     }
+}
+
+@media only screen and (max-height: 450px) {
+
+    header,
+    footer {
+        height: 50px;
+    }
+
+    main {
+        flex-flow: row nowrap;
+        top      : 50px;
+        bottom   : 50px;
+
+    }
+
+    @media only screen and (max-width: 550px) {
+        .scorebar {
+            flex-flow: row wrap;
+        }
+
+        .life {
+            margin: 10px 15px;
+            order: 2;
+        }
+
+        .pokemon {
+            margin: 10px 45px;
+        }
+
+        .score {
+            margin: 10px 15px;
+            order: 1;
+        }
+    }
+
 }
