@@ -47,8 +47,9 @@ footer a {
 }
 
 footer audio {
-    height: 30px;
-    width : 80%
+    height   : 30px;
+    width    : 80%;
+    max-width: 500px;
 }
 
 .flex-col {
@@ -223,7 +224,7 @@ footer audio {
 
         .life {
             margin: 10px 15px;
-            order: 2;
+            order : 2;
         }
 
         .pokemon {
@@ -232,7 +233,7 @@ footer audio {
 
         .score {
             margin: 10px 15px;
-            order: 1;
+            order : 1;
         }
     }
 
