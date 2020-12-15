@@ -1,25 +1,25 @@
 const body = getElement('body');
+const keyboard = getElements('.letters');
+const life = getElement('.life');
 const main = getElement('main');
+const pMsg = getElement('.message');
 const ulWord = getElement('.word');
-const ulQwerty = getElement('.qwerty');
+const keyboardStr = 'qwertyuiopasdfghjklzxcvbnm';
+const specialStr = ':.- ’♀♂';
 const url = './pokemons.json';
 let key;
 let score = 0;
-let numberOfGuesses = 7;
 
 document.onload = init(url);
 
 function export2txt() {
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(new Blob([JSON.stringify(arrayarray, null, 2)], {
-        type: "text/plain"
-    }));
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(arrayarray, null, 2)], { type: "text/plain" }));
     a.setAttribute("download", "data.txt");
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
 }
-
 function clearMessage() {
     pMessage.textContent = '';
 }
@@ -38,59 +38,65 @@ function decrypt(char) {
     }
     return ((key + i) % qwerty.length).toString();
 }
-
 function disableKeyboard() {
-    let keyboard = getElements('.letters');
+    const keyboard = getElements('.letters');
     for (const key of keyboard) {
         key.classList.add('disabled');
     }
 }
-
-function displayMessage(message, key) {
-    const msg = getElement('.message');
-    switch (message) {
-        case 'same-key-pressed': msg.textContent = 'This letter already been guessed';
-            break;
-        case 'you-guessed': msg.textContent = `You guessed the letter ${key}`;
-            break;
-        case 'no-match': msg.textContent = `Guess again!`;
-            break;
-        case 'match': msg.textContent = `You got one right!`;
-            break;
-        case 'win': msg.textContent = `You won! Game Over!`;
-            break;
-        case 'lose': msg.textContent = `You lost! Game Over!`;
-            break;
-    }
-}
-function displayScore(lives) {
-    const liScore = getElement('.score');
-    const keyboard = getElements('.letters');
-    let score = 0;
-    for (const key of keyboard) {
-        if (key.className == 'letters') {
-            score++;
+function displayKeyboard() {
+    const ulKeyboard = getElement('.keyboard');
+    for (let i = 0; i < keyboardStr.length + 1; i++) {
+        if (i < keyboardStr.length) {
+            const li = create('li', 'letters', keyboardStr[i], 'letter', `Key${keyboardStr[i].toUpperCase()}`);
+            ulKeyboard.append(li);
+        }
+        if (i == 9 || i == 18 || i >= 25) {
+            const li = create('li', 'letters hidden', '&nbsp;');
+            ulKeyboard.append(li);
         }
     }
-    liScore.textContent = `Score: ${score * lives}`;
 }
-
-
 function displayLife() {
-    const life = getElement('.life');
     life.innerHTML = `LIFE<br>&nbsp;`;
-    for (let i = 0; i < sessionStorage.life; i++) {
+    for (let i = 0; i < life.dataset.l; i++) {
         life.innerHTML += `${'&hearts;'}`;
     }
-
+}
+function displayMessage(message, key) {
+    switch (message) {
+        case 'same-key-pressed': pMsg.textContent = 'This letter already been guessed';
+            break;
+        case 'you-guessed': pMsg.textContent = `You guessed the letter ${key}`;
+            break;
+        case 'no-match': pMsg.textContent = `Guess again!`;
+            break;
+        case 'match': pMsg.textContent = `You got one right!`;
+            break;
+        case 'win': pMsg.textContent = `You won! Game Over!`;
+            break;
+        case 'lose': pMsg.textContent = `You lost! Game Over!`;
+            break;
+    }
+}
+function displayScore() {
+    const score = getElement('.score');
+    const keyboard = getElements('.letters');
+    let count = 0;
+    for (const key of keyboard) {
+        if (key.className == 'letters') {
+            count++;
+        }
+    }
+    score.innerHTML = `Score:<br>${count * life.dataset.l}`;
 }
 function encrypt(char) {
     let i = 0;
-    for (i; i < sessionStorage.qwerty.length; i++) {
-        if (sessionStorage.qwerty[i] == char)
+    for (i; i < keyboardStr.length; i++) {
+        if (keyboardStr[i] == char)
             break;
     }
-    return ((key + i) % sessionStorage.qwerty.length).toString();
+    return ((key + i) % keyboardStr.length).toString();
 }
 
 function getElement(selector) {
@@ -101,16 +107,16 @@ function getElements(selector) {
     return document.querySelectorAll(selector);
 }
 function handleGameOver() {
-    displayMessage('lose');
     disableKeyboard();
+    displayMessage('lose');
+    sessionStorage.score = 0;
     body.removeEventListener('keypress', handleKeypress);
     body.removeEventListener('click', handleClick);
     getElement('.pokemon').classList.add('show');
 }
-
 function handleGuess(key) {
+    const letterboxes = getElements('.letterbox');
     let countEmptyLetters = 0;
-    let letterboxes = getElements('.letterbox');
     let encryptedLetters = [];
     for (const letterbox of letterboxes) {
         encryptedLetters.push(letterbox.dataset.letter);
@@ -121,30 +127,27 @@ function handleGuess(key) {
         }
         displayMessage('match');
     } else {
-        sessionStorage.life--;
+        life.dataset.l--;
         displayMessage('no-match');
         displayLife();
-
     }
     for (let i = 0; i < letterboxes.length; i++) {
         if (letterboxes[i].textContent == '') {
             countEmptyLetters++;
         }
     }
-    if (sessionStorage.life == 0) handleGameOver();
+    if (life.dataset.l == 0) handleGameOver();
     if (countEmptyLetters == 0) {
-        displayScore(numberOfGuesses);
         displayMessage('win');
+        displayScore();
         disableKeyboard();
-        body.removeEventListener('keypress', handleKeypress);
-        body.removeEventListener('click', handleClick);
         getElement('.pokemon').classList.add('show');
+        body.removeEventListener('click', handleClick);
+        body.removeEventListener('keypress', handleKeypress);
         console.log('win');
     }
 }
-
 function handleClick(e) {
-    let keyboard = getElements('.letters');
     for (const key of keyboard) {
         if (key.dataset.letter == e.target.dataset.letter) {
             if (key.className.includes('invisible')) {
@@ -180,31 +183,21 @@ function init(url) {
 }
 function newGame(pokemons) {
     const pokemon = randomWord(pokemons);
-    sessionStorage.qwerty = 'qwertyuiopasdfghjklzxcvbnm';
-    sessionStorage.special = ':.- ’♀♂';
-
-    sessionStorage.life = 7;
+    life.dataset.l = 7;
     sessionStorage.pokemon = pokemon.name.toLowerCase();
     getElement('.pokemon').style.backgroundImage = `url(${pokemon.src}), url(${pokemon.src})`;
     for (let i = 0; i < sessionStorage.pokemon.length; i++) {
         const letter = sessionStorage.pokemon[i];
-        if (sessionStorage.qwerty.includes(letter)) {
+        if (keyboardStr.includes(letter)) {
             const li = create('li', 'letterbox', null, 'letter', encrypt(letter));
             ulWord.append(li);
-        } else if (sessionStorage.special.includes(pokemon[i])) {
+        } else if (specialStr.includes(pokemon[i])) {
             const li = create('li', 'letterbox', encrypt(letter));
             li.classList.add('special');
             ulWord.append(li);
-        } else {
-            const li = create('li', 'letterbox', encrypt(letter));
-            li.classList.add('hidden');
-            ulWord.append(li);
         }
     }
-    for (let i = 0; i < sessionStorage.qwerty.length; i++) {
-        const li = create('li', 'letters', sessionStorage.qwerty[i], 'letter', `Key${sessionStorage.qwerty[i].toUpperCase()}`);
-        ulQwerty.append(li);
-    }
+    displayKeyboard();
     body.addEventListener('keypress', handleKeypress);
     body.addEventListener('click', handleClick);
 }
