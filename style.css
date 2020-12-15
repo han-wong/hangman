@@ -6,98 +6,121 @@
 }
 
 body {
-    background-color: teal;
-    font-size       : smaller;
+    font-size: initial;
 }
 
 header {
-    color     : whitesmoke;
-    text-align: center;
-    height    : 50px;
-    position  : fixed;
-    top       : 0;
-    left      : 0;
-    right     : 0;
+    background-color: teal;
+    color           : whitesmoke;
+    position        : fixed;
+    top             : 0;
+    height          : 50px;
+    width           : 100%;
+    z-index         : 1;
+}
+
+h1 {
+    color      : whitesmoke;
+    line-height: 50px;
+    text-align : center;
+    position   : fixed;
+    top        : 0;
+    height     : 50px;
+    width      : 100%;
 }
 
 main {
-    align-items    : center;
-    display        : flex;
-    flex-flow      : column nowrap;
-    justify-content: space-evenly;
-    overflow       : hidden;
-    position       : fixed;
-    top            : 50px;
-    bottom         : 50px;
-    left           : 0;
-    right          : 0;
+    align-items     : center;
+    display         : flex;
+    flex-flow       : column nowrap;
+    justify-content : space-evenly;
+    background-color: whitesmoke;
+    padding         : 50px 0;
+    overflow        : auto;
+    position        : absolute;
+    top             : 0;
+    bottom          : 0;
+    left            : 0;
+    right           : 0;
+    min-height      : 500px;
+    height          : 100%;
+    min-width       : 350px;
+    width           : 100%;
 }
 
 footer {
-    height  : 50px;
-    position: fixed;
-    left    : 0;
-    right   : 0;
-    bottom  : 0;
-}
-
-footer a {
-    color     : white;
-    margin-top: 5px;
-}
-
-footer audio {
-    height   : 30px;
-    width    : 80%;
-    max-width: 500px;
-}
-
-.flex-col {
-    align-items    : center;
-    display        : flex;
-    flex-flow      : column nowrap;
-    justify-content: space-evenly;
-}
-
-.flex-row {
-    align-items    : center;
-    display        : flex;
-    flex-flow      : row nowrap;
-    justify-content: space-evenly;
-}
-
-.game-area {
-    background-color: whitesmoke;
-    text-align      : center;
-    height          : 100%;
+    background-color: teal;
+    position        : fixed;
+    bottom          : 0;
+    height          : 50px;
     width           : 100%;
+    z-index         : 1;
+}
+
+audio {
+    margin   : 0 auto;
+    position : fixed;
+    bottom   : 10px;
+    left     : 0;
+    right    : 0;
+    height   : 30px;
+    max-width: 400px;
+    width    : 80%;
+}
+
+.title {
+    text-align: center;
 }
 
 .scorebar {
     align-items    : center;
     display        : flex;
     flex-flow      : row nowrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
     list-style     : none;
     font-weight    : 900;
     text-align     : center;
-    max-width      : 500px;
+    max-width      : 400px;
     width          : 100%;
 }
 
 .score {
     min-width: 54px;
+    width    : 100px;
+}
+
+.pokemon {
+    background-color        : whitesmoke;
+    background-blend-mode   : color-dodge;
+    background-repeat       : no-repeat, no-repeat;
+    background-position     : center center;
+    background-size         : contain;
+    /* background-size      : 100%; */
+    border                  : 3px solid darkgray;
+    border-radius           : 25%;
+    opacity                 : 0.9;
+    height                  : 100px;
+    width                   : 100px;
 }
 
 .life {
     color    : tomato;
     min-width: 54px;
+    width    : 100px;
+}
+
+.message {
+    font-weight: 900;
 }
 
 .word {
-    list-style: none;
-    margin    : 0;
-    padding   : 0;
+    align-items : center;
+    display     : flex;
+    flex-flow   : row nowrap;
+    justify-self: center;
+    list-style  : none;
+    margin      : 0;
+    padding     : 0;
 }
 
 .letterbox {
@@ -106,21 +129,20 @@ footer audio {
     border-radius : 2px;
     color         : whitesmoke;
     font-weight   : 900;
-    line-height   : 13px;
+    line-height   : 14px;
     text-align    : center;
     text-transform: uppercase;
     margin        : 2px;
-    padding       : 6px;
+    padding       : 6px 0;
     height        : 25px;
     width         : 25px;
 }
 
-.message {
-    font-weight: 900;
-}
 
-.qwerty {
-    flex-wrap      : wrap;
+.keyboard {
+    align-items    : center;
+    display        : flex;
+    flex-flow      : row wrap;
     justify-content: center;
     list-style     : none;
     max-width      : 300px;
@@ -136,9 +158,9 @@ footer audio {
     text-align    : center;
     text-transform: uppercase;
     margin        : 2px;
-    padding       : 6px;
-    height        : 26px;
-    width         : 26px;
+    padding       : 6px 0;
+    height        : 25px;
+    width         : 25px;
 }
 
 .letters:hover {
@@ -159,82 +181,31 @@ footer audio {
     padding   : 6px;
 }
 
-.hidden {
-    padding   : 0;
-    width     : 0px;
-    visibility: hidden;
-}
-
 .special {
     padding   : 0;
     width     : 0px;
     visibility: hidden;
 }
 
+.hidden {
+    padding   : 0;
+    width     : 10px;
+    visibility: hidden;
+}    
+
 .invisible {
     visibility: hidden;
-}
-
-.pokemon {
-    background-color        : whitesmoke;
-    background-blend-mode   : color-dodge;
-    background-repeat       : no-repeat, no-repeat;
-    background-position     : center center;
-    background-size         : contain;
-    /* background-size      : 100%; */
-    border                  : 3px solid darkgray;
-    border-radius           : 25%;
-    opacity                 : 0.9;
-    height                  : 100px;
-    width                   : 100px;
 }
 
 .show {
     background-blend-mode: normal;
 }
 
-.title {
-    text-align: center;
-}
 
 @media only screen and (min-width: 400px) {
-    body {
-        font-size: 16px;
-    }
-}
-
-@media only screen and (max-height: 450px) {
-
-    header,
-    footer {
-        height: 50px;
-    }
-
-    main {
-        flex-flow: row nowrap;
-        top      : 50px;
-        bottom   : 50px;
-
-    }
-
-    @media only screen and (max-width: 550px) {
-        .scorebar {
-            flex-flow: row wrap;
-        }
-
-        .life {
-            margin: 10px 15px;
-            order : 2;
-        }
-
-        .pokemon {
-            margin: 10px 45px;
-        }
-
-        .score {
-            margin: 10px 15px;
-            order : 1;
+    @media only screen and (min-height: 450px) {
+        main {
+            font-size: 16px;
         }
     }
-
 }
