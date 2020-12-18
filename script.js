@@ -140,6 +140,7 @@ function newGame() {
         }
     }
     renderKeyboard();
+    updateLife();
     document.body.addEventListener('keypress', handleKeypress);
     ulKeyboard.addEventListener('click', handleClick);
 }
