@@ -1,13 +1,13 @@
 * {
     box-sizing : border-box;
-    font-family: 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: sans-serif;
     margin     : 0;
     padding    : 0;
 }
 
 body {
     background-color: whitesmoke;
-    font-size       : initial;
+    font-size       : medium;
 }
 
 header {
@@ -69,7 +69,7 @@ audio {
     width    : 80%;
 }
 
-.scorebar {
+.scoreboard {
     align-items    : flex-start;
     display        : flex;
     flex-flow      : row nowrap;
@@ -82,12 +82,13 @@ audio {
 }
 
 .score {
-    min-width: 54px;
-    width    : 100px;
+    line-height: 25px;
+    min-width  : 80px;
+
 }
 
 .pokemon {
-    background-color        : whitesmoke;
+    background-color        : lightgray;
     background-blend-mode   : color-dodge;
     background-repeat       : no-repeat, no-repeat;
     background-position     : center center;
@@ -102,14 +103,13 @@ audio {
 
 .life {
     color    : tomato;
-    min-width: 54px;
-    width    : 100px;
+    min-width: 80px;
 }
 
 .text {
     font-weight: 900;
     line-height: 30px;
-    text-align: center;
+    text-align : center;
 }
 
 .word {

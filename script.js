@@ -165,10 +165,10 @@ function updateScore() {
         }
     }
     if (life) score += count * life;
-    liScore.innerHTML = `Score:<br>${score}`;
+    liScore.innerHTML = `Score<br>${score}`;
     if (localStorage.score) {
         if (localStorage.score < score) localStorage.score = score;
-        liScore.innerHTML += `<br>Hi-Score:<br>${localStorage.score}`;
+        liScore.innerHTML += `<br>Hi-Score<br>${localStorage.score}`;
     } else {
         localStorage.score = score;
     }
