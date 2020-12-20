@@ -84,7 +84,6 @@ audio {
 .score {
     line-height: 25px;
     min-width  : 80px;
-
 }
 
 .pokemon {
@@ -93,7 +92,6 @@ audio {
     background-repeat       : no-repeat, no-repeat;
     background-position     : center center;
     background-size         : contain;
-    /* background-size      : 100%; */
     border                  : 3px solid darkgray;
     border-radius           : 25%;
     opacity                 : 0.9;
@@ -198,7 +196,6 @@ audio {
 .show {
     background-blend-mode: normal;
 }
-
 
 @media only screen and (min-width: 400px) {
     @media only screen and (min-height: 450px) {
