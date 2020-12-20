@@ -77,13 +77,14 @@ audio {
     list-style     : none;
     font-weight    : 900;
     text-align     : center;
-    max-width      : 300px;
-    width          : 100%;
+    min-width      : 320px;
+    max-width      : 400px;
+    width          : 80%;
 }
 
 .score {
     line-height: 25px;
-    min-width  : 80px;
+    min-width  : 100px;
 }
 
 .pokemon {
@@ -101,7 +102,7 @@ audio {
 
 .life {
     color    : tomato;
-    min-width: 80px;
+    min-width: 100px;
 }
 
 .text {
