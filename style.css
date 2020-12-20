@@ -85,24 +85,26 @@ audio {
 .score {
     line-height: 25px;
     min-width  : 100px;
+    width      : 33.33%;
 }
 
 .pokemon {
-    background-color        : lightgray;
-    background-blend-mode   : color-dodge;
-    background-repeat       : no-repeat, no-repeat;
-    background-position     : center center;
-    background-size         : contain;
-    border                  : 3px solid darkgray;
-    border-radius           : 25%;
-    opacity                 : 0.9;
-    height                  : 100px;
-    width                   : 100px;
+    background-color     : lightgray;
+    background-blend-mode: color-dodge;
+    background-repeat    : no-repeat, no-repeat;
+    background-position  : center center;
+    background-size      : contain;
+    border               : 3px solid darkgray;
+    border-radius        : 25%;
+    opacity              : 0.9;
+    height               : 100px;
+    width                : 100px;
 }
 
 .life {
     color    : tomato;
     min-width: 100px;
+    width    : 33.33%;
 }
 
 .text {
